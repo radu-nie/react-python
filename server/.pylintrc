@@ -1,2 +1,3 @@
 ignored-classes=SQLObject,Registrant,scoped_session
 --disable=invalid-name,used-before-assignment
+good-names=i,j,df
