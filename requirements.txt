@@ -6,6 +6,7 @@ flask-accepts==0.10.0
 Flask-RESTful==0.3.7
 flask-restplus==0.12.1
 Flask-Script==2.0.6
+Flask-Cors==3.0.8
 Flask-SQLAlchemy==2.4.0
 itsdangerous==1.1.0
 Jinja2==2.10.1
@@ -13,7 +14,7 @@ jsonschema==3.0.2
 MarkupSafe==1.1.1
 marshmallow==3.2.0
 mypy-extensions==0.4.1
-numpy==1.17.0
+numpy==1.18.1
 pandas==0.25.0
 pyrsistent==0.15.4
 python-dateutil==2.8.0
