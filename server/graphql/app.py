@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_graphql import GraphQLView
 
-from base import db_session
-from schema import schema, Department
+from database.base import db_session
+#from .product.schema import schema, Department
+from schemas.schema import schema
 
 app = Flask(__name__)
 app.debug = True
