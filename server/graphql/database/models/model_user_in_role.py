@@ -5,6 +5,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship, backref
 from datetime import datetime
 
+
 class ModelUserInRole(Base):
     __tablename__ = 'user_in_role'
     id = Column(Integer, primary_key=True)
@@ -15,7 +16,7 @@ class ModelUserInRole(Base):
         ModelUser,
         backref=backref('user',
                         uselist=True))
-    roles = relationship(
+    role = relationship(
         ModelRole,
         backref=backref('roles',
                         uselist=True))

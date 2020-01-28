@@ -7,6 +7,7 @@ from schemas.schema_role import *
 from schemas.schema_user import *
 from schemas.schema_user_in_role import *
 
+
 class Query(graphene.ObjectType):
     """Query objects for GraphQL API."""
 
@@ -18,11 +19,11 @@ class Query(graphene.ObjectType):
     userInRole = graphene.relay.Node.Field(UserInRole)
     userInRoleList = SQLAlchemyConnectionField(UserInRole)
 
+
 class Mutation(graphene.ObjectType):
     createUser = CreateUser.Field()
     updateUser = UpdateUser.Field()
-    # createPlanet = schema_planet.CreatePlanet.Field()
-    # updatePlanet = schema_planet.UpdatePlanet.Field()
+    deleteUser = DeleteUser.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

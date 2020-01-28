@@ -8,7 +8,6 @@ class UserInRoleAttribute:
     user_id = graphene.ID(description="ID of the user.")
     role_id = graphene.ID(description="ID of the role.")
     date_added = graphene.String(description="Date added of the user in role.")
-   
 
 
 class UserInRole(SQLAlchemyObjectType, UserInRoleAttribute):

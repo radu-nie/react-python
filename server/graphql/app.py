@@ -7,6 +7,7 @@ from schemas.schema import schema
 
 app = Flask(__name__)
 app.debug = True
+app.env = "development"
 
 app.add_url_rule(
     '/graphql',

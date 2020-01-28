@@ -6,11 +6,14 @@ import graphene
 import utils
 
 # Create a generic class to mutualize description of user attributes for both queries and mutations
+
+
 class UserAttribute:
     first_name = graphene.String(description="First Name of the user.")
     last_name = graphene.String(description="Last name of the user.")
     email = graphene.String(description="Email of the user.")
     phone_no = graphene.String(description="Phone number of the user.")
+
 
 class User(SQLAlchemyObjectType, UserAttribute):
     """User node."""
@@ -19,6 +22,7 @@ class User(SQLAlchemyObjectType, UserAttribute):
         model = ModelUser
         interfaces = (graphene.relay.Node,)
 
+
 class CreateUserInput(graphene.InputObjectType, UserAttribute):
     """Arguments to create a user."""
     pass
@@ -26,7 +30,8 @@ class CreateUserInput(graphene.InputObjectType, UserAttribute):
 
 class CreateUser(graphene.Mutation):
     """Mutation to create a user."""
-    user = graphene.Field(lambda: User, description="User created by this mutation.")
+    user = graphene.Field(
+        lambda: User, description="User created by this mutation.")
 
     class Arguments:
         input = CreateUserInput(required=True)
@@ -50,7 +55,8 @@ class UpdateUserInput(graphene.InputObjectType, UserAttribute):
 
 class UpdateUser(graphene.Mutation):
     """Update a user."""
-    user = graphene.Field(lambda: User, description="User updated by this mutation.")
+    user = graphene.Field(
+        lambda: User, description="User updated by this mutation.")
 
     class Arguments:
         input = UpdateUserInput(required=True)
@@ -65,3 +71,25 @@ class UpdateUser(graphene.Mutation):
         user = db_session.query(ModelUser).filter_by(id=data['id']).first()
 
         return UpdateUser(user=user)
+
+
+class DeleteUserInput(graphene.InputObjectType, UserAttribute):
+    """Arguments to update a user."""
+    id = graphene.ID(required=True, description="Global Id of the user.")
+
+
+class DeleteUser(graphene.Mutation):
+    """Delete a user by id."""
+    user = graphene.Field(
+        lambda: User, description="User deleted by this mutation.")
+
+    class Arguments:
+        input = DeleteUserInput(required=True)
+
+    def mutate(self, inf, input):
+        data = utils.input_to_dictionary(input)
+        user = db_session.query(ModelUser).filter_by(id=data['id']).first()
+        db_session.delete(user)
+        db_session.commit()
+
+        return DeleteUser(user=user)
