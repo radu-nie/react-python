@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_graphql import GraphQLView
-
+from flask_cors import CORS
 from database.base import db_session
 #from .product.schema import schema, Department
 from schemas.schema import schema
@@ -8,6 +8,7 @@ from schemas.schema import schema
 app = Flask(__name__)
 app.debug = True
 app.env = "development"
+CORS(app)
 
 app.add_url_rule(
     '/graphql',

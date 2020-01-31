@@ -9,7 +9,7 @@ const contactsReducer = (state = {
             };
             break;
         case "EDIT_CONTACT":
-            var initialContact = state.contacts.find(x => (x.id = action.payload));
+            //var initialContact = state.contacts.find(x => (x.id = action.payload));
             state = {
                 ...state
             };
@@ -17,7 +17,7 @@ const contactsReducer = (state = {
         case "DELETE_CONTACT":
             state = {
                 ...state,
-                contacts: state.contacts.filter(contact => contact.id != action.payload.id)
+                contacts: state.contacts.filter(contact => contact.node.id !== action.payload.id)
             }
             break;
         default:
